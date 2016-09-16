@@ -121,7 +121,7 @@ var p1 = new Person("Christiaan", new Date("02/04/1996"), []);
 p1.add_friend(new Person("Drew", new Date("01/01/1996"), [p1]));
 p1.add_friend(new Person("Nate", new Date("01/01/1995"), [p1]));
 p1.add_friend(new Person("Frank", new Date("04/06/1996"), [p1]));
-p1.get_friends(); // This person has these friends: Drew
+console.log(p1.get_friends()); // This person has these friends: Drew
 
 
 //////////////////
