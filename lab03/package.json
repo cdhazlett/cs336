@@ -1,0 +1,15 @@
+{
+  "name": "lab03",
+  "version": "1.0.0",
+  "description": "CS 336 Lab 03 by Christiaan Hazlett",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christiaan Hazlett (cdh24)",
+  "license": "ISC"
+}
