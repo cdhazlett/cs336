@@ -29,25 +29,33 @@
     <div class="indent-me">
       <div class="well">
         <h4>Exercise 3.1</h4><br>
-        <p>Node.js and Express.js are two very different things.&nbsp;Node.js is an application interpreter/runtime for Javascript, while Express.js is a library that adds additional niceties on top of Node's capabilities, such as the ability to load in "middleware," use templating engines, and do routing, etc.&nbsp;&nbsp;While Node does include somewhat basic HTTP functionality out of the box, Express provides the necessary packages and functions to be able to easily create a webapp server using Node.</p>
-        <br>
-        <p>The <code>packages.json</code> file is the file used by Node's package manager, NPM, to determine which dependencies need to be installed in order to run your Node app.&nbsp;&nbsp;In addition to just listing required packages and their versions, the <code>packages.json</code> file also gives some meta information about the package it is included in, such as the version, author, and a description of what the package does.</p>
+        <ul>
+          <li><p>Node.js and Express.js are two very different things.&nbsp;Node.js is an application interpreter/runtime for Javascript, while Express.js is a library that adds additional niceties on top of Node's capabilities, such as the ability to load in "middleware," use templating engines, and do routing, etc.&nbsp;&nbsp;While Node does include somewhat basic HTTP functionality out of the box, Express provides the necessary packages and functions to be able to easily create a webapp server using Node.</p></li>
+          <br>
+          <li><p>The <code>packages.json</code> file is the file used by Node's package manager, NPM, to determine which dependencies need to be installed in order to run your Node app.&nbsp;&nbsp;In addition to just listing required packages and their versions, the <code>packages.json</code> file also gives some meta information about the package it is included in, such as the version, author, and a description of what the package does.</p></li>
+        </ul>
       </div>
 
       <div class="well">
         <h4>Exercise 3.2</h4><br>
-        <p>Static files in the <code>/static</code> directory are files that Node will simply load and then send to the user without any middleware intervention.&nbsp;&nbsp;This makes it really easy to have a bunch of Javascript or CSS files that can be easily created and linked to without adding a route for each one.&nbsp;&nbsp;These files are 'static' in the sense that they are not interpreted by Node or a templating engine before being sent to the user, they are just loaded from disk and sent straight to the user without any other interventions by the server&mdash;so, they just don't change.</p>
-        <br>
-        <p>Well, my server continues to, at <a href="/hello"><code>/hello</code></a>, since I changed the route.  If the <code>static</code> directive had been placed above the routes section, and an <code>index.html</code> file had been placed into the <code>/static</code> folder, then the static file would have trumped the routed text message.&nbsp;&nbsp;But, if the route had been placed above the <code>static</code> directive, then the route would have taken precedence over the static files.&nbsp;&nbsp;In other words, Express will choose the first matching route/file when given a choice.&nbsp;&nbsp;So, if I had not changed anything, then no, the text would no longer be displayed.</p>
+        <ul>
+          <li><p>Static files in the <code>/static</code> directory are files that Node will simply load and then send to the user without any middleware intervention.&nbsp;&nbsp;This makes it really easy to have a bunch of Javascript or CSS files that can be easily created and linked to without adding a route for each one.&nbsp;&nbsp;These files are 'static' in the sense that they are not interpreted by Node or a templating engine before being sent to the user, they are just loaded from disk and sent straight to the user without any other interventions by the server&mdash;so, they just don't change.</p></li>
+          <br>
+          <li><p>Well, my server continues to, at <a href="/hello"><code>/hello</code></a>, since I changed the route.  If the <code>static</code> directive had been placed above the routes section, and an <code>index.html</code> file had been placed into the <code>/static</code> folder, then the static file would have trumped the routed text message.&nbsp;&nbsp;But, if the route had been placed above the <code>static</code> directive, then the route would have taken precedence over the static files.&nbsp;&nbsp;In other words, Express will choose the first matching route/file when given a choice.&nbsp;&nbsp;So, if I had not changed anything, then no, the text would no longer be displayed.</p></li>
+        </ul>
       </div>
 
       <div class="well">
         <h4>Image</h4><br>
-        <p>To fulfill the requirements for the lab, here's a picture of everybody's favorite Star Wars character:</p>
-        <img src="img/jarjar.jpg"></img><br><br>
-        <p>
-          <a href="http://www.independent.co.uk/arts-entertainment/films/news/jar-jar-binks-is-going-to-die-in-star-wars-the-force-awakens-10225283.html">Here's where I got it from.</a>
-        </p>
+        <ul>
+          <li>
+            <p>To fulfill the requirements for the lab, here's a picture of everybody's favorite Star Wars character:</p>
+            <img src="img/jarjar.jpg"></img><br><br>
+            <p>
+              <a href="http://www.independent.co.uk/arts-entertainment/films/news/jar-jar-binks-is-going-to-die-in-star-wars-the-force-awakens-10225283.html">Here's where I got it from.</a>
+            </p>
+          </li>
+        </ul>
       </div>
     </div>
 
