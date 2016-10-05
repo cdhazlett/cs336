@@ -1,0 +1,95 @@
+// CS336 Lab 5 by cdh24
+
+// I changed the suffix of this file name to .styl so that Atom editor would
+// recognize the file format
+
+// Variables
+cs-padding = 15px;
+cs-border-width = 1px;
+cs-border-color = black;
+cs-margin = 0px;
+
+body
+  // Global body styles
+  font: 24px Helvetica
+  background: #999999
+
+
+#main
+  // Set the defaults for everything under the main wrapper div
+  min-height: 800px
+  margin: cs-margin
+  padding: 0px
+  display: flex
+  flex-flow: row
+
+  // These styles are for the main article section
+  article
+    margin: cs-margin
+    padding: cs-padding
+    border: cs-border-width solid cs-border-color
+    background: #dddd88
+    flex: 3 1 60%
+    order: 2
+
+  // Styles for the navigation bar
+  nav
+    margin: cs-margin
+    padding: cs-padding
+    background: #ccccff
+    flex: 1 6 20%
+    order: 1
+    border: cs-border-width solid cs-border-color
+    text-align: right
+
+  // Styles for the right sidebar
+  aside
+    margin: cs-margin
+    padding: cs-padding
+    background: #ccccff
+    flex: 1 6 20%
+    order: 3
+    border: cs-border-width solid cs-border-color
+
+// These styles I added for the header element so that the text would
+// align vertically
+header
+  line-height: 100px
+  font-size: 30pt
+
+// These are the shared styles for the header and footer
+header, footer
+  display: block
+  margin: cs-margin
+  padding: cs-padding
+  vertical-align: middle
+  min-height: 100px
+  background: #ffeebb
+  border: cs-border-width solid cs-border-color
+
+
+// This media query is applied when the width of the browser's viewport is less
+// than or equal to 640px, the size that generally denotes a mobile phone browser
+@media all and (max-width: 640px)
+  #main, #page
+    flex-direction: column
+
+  // Change some of the styles for the main content wrapper
+  #main
+    article, nav, aside
+      // Return them to document order
+      order: 0
+
+    nav, aside, header, footer
+      min-height: 50px
+      font-size: 12pt
+
+    nav
+      text-align: left
+      order: -1
+
+
+
+  header
+    line-height: 50px
+    font-size: 18pt
