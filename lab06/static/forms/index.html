@@ -1,0 +1,34 @@
+<!--
+  Lab06 for CS336
+  date: 10-14-16
+  author: Christiaan Hazlett
+  includes code from Mozilla tutorial
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CS336 Lab06</title>
+    <link rel="stylesheet" href="styles.css"></link>
+  </head>
+  <body>
+    <form action="/forms" method="post">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="user_name" />
+        </div>
+        <div>
+            <label for="mail">E-mail:</label>
+            <input type="email" id="mail" name="user_email" />
+        </div>
+        <div>
+            <label for="msg">Message:</label>
+            <textarea id="msg" name="user_message"></textarea>
+        </div>
+
+        <div class="button">
+            <button type="submit">Send your message</button>
+        </div>
+    </form>
+  </body>
+</html>
