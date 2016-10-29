@@ -1,0 +1,168 @@
+<!-- Lab08 by cdh24 for CS336 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Tutorial</title>
+    <!-- Not present in the tutorial. Just for basic styling. -->
+    <link rel="stylesheet" href="css/base.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <!-- This was causing a lot of grief with weird errors in the console, because
+         the version on the tutorial page differed from the examples they have to
+         download.  So, I just started with the code from the examples, since I
+         was able to verify that it worked.  It looks like they must have just
+         changed the markdown parser library and then forgot to update it everywhere
+         on the tutorial page. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel">
+
+    // This class models an individual comment made by a person
+    var Comment = React.createClass({
+      rawMarkup: function() {
+        var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+        return { __html: rawMarkup };
+      },
+
+      render: function() {
+        return (
+          <div className="comment">
+            <h2 className="commentAuthor">
+              {this.props.author}
+            </h2>
+            <span dangerouslySetInnerHTML={this.rawMarkup()} />
+          </div>
+        );
+      }
+    });
+
+    // This class models the comment box, where you can add a comment to the page.
+    // It includes code to submit comments to the server, as well as to pull them
+    // back down from the server, in order to update the comment list on the page.
+    var CommentBox = React.createClass({
+      loadCommentsFromServer: function() {
+        $.ajax({
+          url: this.props.url,
+          dataType: 'json',
+          cache: false,
+          success: function(data) {
+            this.setState({data: data});
+          }.bind(this),
+          error: function(xhr, status, err) {
+            console.error(this.props.url, status, err.toString());
+          }.bind(this)
+        });
+      },
+      handleCommentSubmit: function(comment) {
+        var comments = this.state.data;
+        comment.id = Date.now();
+        var newComments = comments.concat([comment]);
+        this.setState({data: newComments});
+        $.ajax({
+          url: this.props.url,
+          dataType: 'json',
+          type: 'POST',
+          data: comment,
+          success: function(data) {
+            this.setState({data: data});
+          }.bind(this),
+          error: function(xhr, status, err) {
+            this.setState({data: comments});
+            console.error(this.props.url, status, err.toString());
+          }.bind(this)
+        });
+      },
+      getInitialState: function() {
+        return {data: []};
+      },
+      componentDidMount: function() {
+        this.loadCommentsFromServer();
+        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+      },
+      render: function() {
+        return (
+          <div className="commentBox">
+            <h1>Comments</h1>
+            <CommentList data={this.state.data} />
+            <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+          </div>
+        );
+      }
+    });
+
+    // This class creates a list of the comment objects above on the screen--one
+    // for each comment left by a person.  It creates the comment objects in a
+    // list of comment nodes, populates them with data using the map function,
+    // and then fills them into the commentList div.
+    var CommentList = React.createClass({
+      render: function() {
+        var commentNodes = this.props.data.map(function(comment) {
+          return (
+            <Comment author={comment.author} key={comment.id}>
+              {comment.text}
+            </Comment>
+          );
+        });
+        return (
+          <div className="commentList">
+            {commentNodes}
+          </div>
+        );
+      }
+    });
+
+    var CommentForm = React.createClass({
+      getInitialState: function() {
+        return {author: '', text: ''};
+      },
+      handleAuthorChange: function(e) {
+        this.setState({author: e.target.value});
+      },
+      handleTextChange: function(e) {
+        this.setState({text: e.target.value});
+      },
+      handleSubmit: function(e) {
+        e.preventDefault();
+        var author = this.state.author.trim();
+        var text = this.state.text.trim();
+        if (!text || !author) {
+          return;
+        }
+        this.props.onCommentSubmit({author: author, text: text});
+        this.setState({author: '', text: ''});
+      },
+      render: function() {
+        return (
+          <form className="commentForm" onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              placeholder="Your name"
+              value={this.state.author}
+              onChange={this.handleAuthorChange}
+            />
+            <input
+              type="text"
+              placeholder="Say something..."
+              value={this.state.text}
+              onChange={this.handleTextChange}
+            />
+            <input type="submit" value="Post" />
+          </form>
+        );
+      }
+    });
+
+    ReactDOM.render(
+      <CommentBox url="/api/comments" pollInterval={2000} />,
+      document.getElementById('content')
+    );
+
+    </script>
+  </body>
+</html>
