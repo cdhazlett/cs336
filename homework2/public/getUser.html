@@ -1,0 +1,26 @@
+<!--  CS 336 Homework 02
+      Author: Christiaan Hazlett
+      Date: 10-28-16 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Display User</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>Enter a user ID below:</h1>
+    <input id="id_num" placeholder="ID Number"></input>
+    <br><br>
+    <button id="submitButton">Get user</button>
+    <br><br>
+    <div id="resText"></div>
+    <script type="text/javascript">
+      $('#submitButton').click(function(){
+        $.ajax({url: "/people/"+$('#id_num').val(), method: "GET", success: function(result){
+          $('#resText').html("ID: "+result.id_num+"<br>Name: "+result.fullName+"<br>Start Date: "+result.startDate);
+        }});
+      });
+    </script>
+  </body>
+</html>

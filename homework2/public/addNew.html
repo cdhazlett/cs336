@@ -1,0 +1,31 @@
+<!--  CS 336 Homework 02
+      Author: Christiaan Hazlett
+      Date: 10-28-16 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add a new person</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>Add a new person below:</h1>
+    <input id="id_num" placeholder="ID Number"></input>
+    <input id="name" placeholder="Full Name"></input>
+    <input id="startDate" placeholder="Start Date"></input>
+    <br><br>
+    <button id="submitButton">Click to add</button>
+    <script type="text/javascript">
+      $('#submitButton').click(function(){
+        var myData = {
+          "id_num" : $('#id_num').val(),
+          "fullName" : $('#name').val(),
+          "startDate" : $('#startDate').val()
+        }
+        $.ajax({url: "/people", method: "POST", data: myData, success: function(result){
+          window.alert("Person successfully added!");
+        }});
+      });
+    </script>
+  </body>
+</html>
