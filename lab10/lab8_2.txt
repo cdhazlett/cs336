@@ -1,0 +1,15 @@
+Christiaan Hazlett, lab08, CS336
+
+a.
+i. The UI is composable because it is made up of modular components that react renders.  This is important because it allows code reuse and modularization.
+ii. JSX is an HTML templating engine, it makes writing HTML less verbose.
+iii. There is a CommentBox objects, which loads both a form and a comment list, which loads individual comments.  The data goes from the input form, to the server, through the methods in the CommentBox object, then gets loaded into a Comment and displayed in the CommentList.
+iv. Props are immutable.  They are passed from the parent to the child.  They are owned by the parent.  Props have states, which are mutable.  When the state is updated, the prop is rendered to the screen with the updates and changes.
+
+b.
+i. When the file is modified on the system, it updates the browser.  This is because the node server is watching for changes to that file, and then sends out the changes via websockets.
+ii. Because it needs to first create the comment objects, then add them to the comment list, which is then rendered.
+iii. Because it would be bad if the data model and the UI view got out of sync.
+iv. If the server gives an error, then the comment data object is reset to the server's version, and the erroneous comment removed.
+
+(Hi from a swim meet in Olivet, MI)
