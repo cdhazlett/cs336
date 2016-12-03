@@ -42,16 +42,8 @@ module.exports = React.createClass({
     this.context.router.push('/');
   },
   handleDelete: function() {
-    $.ajax({
-      url: API_URL + "/" + this.props.params.id,
-      type: 'DELETE',
-    })
-    .done(function(comments){
-      this.context.router.push('/');
-    }.bind(this))
-    .fail(function(xhr, status, errorThrown) {
-      console.error(API_URL, status, errorThrown.toString());
-    }.bind(this));
+    store.dispatch(ActionTools.deleteComment(Number(this.props.params.id)));
+    this.context.router.push('/');
   },
   render: function() {
     return (
